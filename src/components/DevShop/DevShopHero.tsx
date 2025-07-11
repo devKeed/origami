@@ -2,9 +2,6 @@ import { CircleBg } from "./devshop_elements/CircleBg";
 
 const DevShopHero = () => (
   <section className="py-12 md:py-16 bg-black min-h-screen flex items-center relative overflow-hidden">
-    {/* <ParticlesBackground /> */}
-
-    {/* Subtle background pattern */}
     <div
       className="absolute inset-0 opacity-5"
       style={{

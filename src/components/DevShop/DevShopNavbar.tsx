@@ -1,48 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DevShopMenuDialog from "./DevShopMenuDialog";
 import AnimatedHamburger from "./devshop_elements/AnimatedHamburger";
 
 const DevShopNavbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Check if we're in desktop mode
+  useEffect(() => {
+    const checkIsDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024); // lg breakpoint
+    };
+
+    checkIsDesktop();
+    window.addEventListener("resize", checkIsDesktop);
+
+    return () => window.removeEventListener("resize", checkIsDesktop);
+  }, []);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (!isDesktop) {
+      setMenuOpen(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (!isDesktop) {
+      setMenuOpen(false);
+    }
+  };
 
   return (
     <>
-      <nav className="sticky top-0 bg-black ">
+      <nav className=" top-0 bg-black ">
         <div className="container mx-auto flex items-center justify-between py-6 sm:py-10 px-4">
           <img src="/nitoons_logo.svg" width="180" alt="Nitoons logo" />
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Menu toggle */}
+          <div
+            className="relative"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
             <AnimatedHamburger
-              isOpen={menuOpen}
+              isOpen={isDesktop ? menuOpen || isHovered : menuOpen}
               onClick={() => setMenuOpen(!menuOpen)}
             />
-          </div>
-          {/* Desktop links */}
-          <div className="hidden md:flex space-x-8 items-center">
-            <a
-              href="#portfolio"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              Portfolio
-            </a>
-            <a
-              href="#services"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              Services
-            </a>
-            <button
-              onClick={() =>
-                (window.location.href = "mailto:business@nitoons.com")
-              }
-              className="px-4 py-2 border border-gray-600 text-gray-400 rounded hover:border-gray-400 hover:text-white transition-colors"
-            >
-              Contact Us
-            </button>
+            <DevShopMenuDialog
+              open={menuOpen}
+              onClose={() => setMenuOpen(false)}
+            />
           </div>
         </div>
       </nav>
-      <DevShopMenuDialog open={menuOpen} onClose={() => setMenuOpen(false)} />
     </>
   );
 };
