@@ -1,14 +1,23 @@
-'use client'
+"use client";
 
-import { useEffect } from 'react'
-import Script from 'next/script'
+import { useEffect } from "react";
 
 export default function ParticlesBackground() {
   useEffect(() => {
+    // inject particles.js script
+    const script = document.createElement("script");
+    script.src =
+      "https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js";
+    script.async = true;
+    script.onload = () => console.log("Particles.js loaded");
+    script.onerror = () => console.error("Failed to load particles.js");
+    document.body.appendChild(script);
+
+    // initialize particles when library is ready
     const initParticles = () => {
-      if (typeof window !== 'undefined' && (window as any).particlesJS) {
-        console.log('Initializing particles...')
-        ;(window as any).particlesJS('particles-js', {
+      if (typeof window !== "undefined" && (window as any).particlesJS) {
+        console.log("Initializing particles...");
+        (window as any).particlesJS("particles-js", {
           particles: {
             number: {
               value: 60,
@@ -18,13 +27,13 @@ export default function ParticlesBackground() {
               },
             },
             color: {
-              value: '#00faff',
+              value: "#00faff",
             },
             shape: {
-              type: 'circle',
+              type: "circle",
               stroke: {
                 width: 0,
-                color: '#000000',
+                color: "#000000",
               },
             },
             opacity: {
@@ -50,17 +59,17 @@ export default function ParticlesBackground() {
             line_linked: {
               enable: true,
               distance: 150,
-              color: '#00faff',
+              color: "#00faff",
               opacity: 0.4,
               width: 1,
             },
             move: {
               enable: true,
               speed: 2,
-              direction: 'none',
+              direction: "none",
               random: false,
               straight: false,
-              out_mode: 'out',
+              out_mode: "out",
               bounce: false,
               attract: {
                 enable: false,
@@ -70,15 +79,15 @@ export default function ParticlesBackground() {
             },
           },
           interactivity: {
-            detect_on: 'canvas',
+            detect_on: "canvas",
             events: {
               onhover: {
                 enable: true,
-                mode: 'repulse',
+                mode: "repulse",
               },
               onclick: {
                 enable: true,
-                mode: 'push',
+                mode: "push",
               },
               resize: true,
             },
@@ -109,96 +118,76 @@ export default function ParticlesBackground() {
             },
           },
           retina_detect: true,
-        })
+        });
 
         // Add manual event listeners as fallback
         const canvas = document.querySelector(
-          '#particles-js canvas',
-        ) as HTMLCanvasElement
+          "#particles-js canvas"
+        ) as HTMLCanvasElement;
         if (canvas) {
-          console.log('Canvas found, adding event listeners...')
+          console.log("Canvas found, adding event listeners...");
 
-          canvas.addEventListener('mousemove', e => {
-            console.log('Mouse move detected')
-            const rect = canvas.getBoundingClientRect()
-            const x = e.clientX - rect.left
-            const y = e.clientY - rect.top
+          canvas.addEventListener("mousemove", (e) => {
+            console.log("Mouse move detected");
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
 
             // Trigger repulse effect manually if needed
             if ((window as any).pJSDom && (window as any).pJSDom[0]) {
-              const pJS = (window as any).pJSDom[0].pJS
+              const pJS = (window as any).pJSDom[0].pJS;
               if (pJS && pJS.interactivity) {
-                pJS.interactivity.mouse.pos_x = x
-                pJS.interactivity.mouse.pos_y = y
+                pJS.interactivity.mouse.pos_x = x;
+                pJS.interactivity.mouse.pos_y = y;
               }
             }
-          })
+          });
 
-          canvas.addEventListener('click', e => {
-            console.log('Click detected')
+          canvas.addEventListener("click", () => {
+            console.log("Click detected");
             // Manual particle addition
             if ((window as any).pJSDom && (window as any).pJSDom[0]) {
-              const pJS = (window as any).pJSDom[0].pJS
+              const pJS = (window as any).pJSDom[0].pJS;
               if (pJS && pJS.fn && pJS.fn.modes && pJS.fn.modes.pushParticles) {
-                pJS.fn.modes.pushParticles(4, pJS.interactivity.mouse)
+                pJS.fn.modes.pushParticles(4, pJS.interactivity.mouse);
               }
             }
-          })
+          });
         }
       }
-    }
+    };
 
     const interval = setInterval(() => {
       const particlesLibReady =
-        typeof (window as any).particlesJS !== 'undefined'
-      console.log('Checking particles library:', particlesLibReady)
+        typeof (window as any).particlesJS !== "undefined";
+      console.log("Checking particles library:", particlesLibReady);
 
       if (particlesLibReady) {
-        clearInterval(interval)
-        initParticles()
+        clearInterval(interval);
+        initParticles();
 
         const count_particles = document.querySelector(
-          '.js-count-particles',
-        ) as HTMLElement
+          ".js-count-particles"
+        ) as HTMLElement;
 
         const update = () => {
-          const particles = (window as any).pJSDom?.[0]?.pJS?.particles?.array
+          const particles = (window as any).pJSDom?.[0]?.pJS?.particles?.array;
           if (particles && count_particles) {
-            count_particles.innerText = particles.length.toString()
+            count_particles.innerText = particles.length.toString();
           }
-          requestAnimationFrame(update)
-        }
-        requestAnimationFrame(update)
+          requestAnimationFrame(update);
+        };
+        requestAnimationFrame(update);
       }
-    }, 100)
+    }, 100);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
+  // render container for particles
   return (
-    <>
-      <Script
-        src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"
-        strategy="beforeInteractive"
-        onLoad={() => console.log('Particles.js loaded')}
-        onError={() => console.error('Failed to load particles.js')}
-      />
-      <div id="particles-js" className="particles-container">
-        {/* <div
-          style={{
-            position: 'absolute',
-            top: '10px',
-            left: '10px',
-            color: '#00faff',
-            fontSize: '12px',
-            fontFamily: 'monospace',
-            zIndex: 10,
-            pointerEvents: 'none',
-          }}
-        >
-          Move mouse to interact
-        </div> */}
-      </div>
-    </>
-  )
+    <div className="relative w-full h-full">
+      <div id="particles-js" className="absolute inset-0" />
+    </div>
+  );
 }

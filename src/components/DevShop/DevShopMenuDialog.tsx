@@ -1,77 +1,65 @@
-import { Dialog, DialogContent, List, ListItem, ListItemButton, ListItemText, IconButton } from '@mui/material'
-import CloseIcon from '@mui/icons-material/Close'
-import { useRouter } from 'next/router'
+import React from "react";
 
 interface DevShopMenuDialogProps {
-  open: boolean
-  onClose: () => void
+  open: boolean;
+  onClose: () => void;
 }
 
 const DevShopMenuDialog = ({ open, onClose }: DevShopMenuDialogProps) => {
-  const router = useRouter()
-
   const handleNavigate = (path: string) => {
-    router.push(path)
-    onClose()
-  }
+    window.location.href = path;
+    onClose();
+  };
 
   const handleAnchorClick = (anchor: string) => {
-    onClose()
+    onClose();
     setTimeout(() => {
-      const element = document.querySelector(anchor)
-      element?.scrollIntoView({ behavior: 'smooth' })
-    }, 100)
-  }
+      const element = document.querySelector(anchor);
+      element?.scrollIntoView({ behavior: "smooth" });
+    }, 100);
+  };
 
   return (
-    <Dialog
-      open={open}
-      onClose={onClose}
-      fullWidth
-      maxWidth="xs"
-      PaperProps={{
-        sx: {
-          position: 'fixed',
-          top: 0,
-          m: 0,
-          borderRadius: 0,
-          bgcolor: '#1A1A1A',
-          color: '#F9FAFB'
-        }
-      }}
-    >
-      <DialogContent sx={{ p: 0, bgcolor: '#1A1A1A' }}>
-        <IconButton
+    open && (
+      <div className="fixed inset-0 bg-black bg-opacity-80 z-50 flex flex-col p-6">
+        <button
+          className="self-end text-gray-400 text-2xl"
           onClick={onClose}
-          sx={{ position: 'absolute', right: 8, top: 8, color: '#D1D5DB' }}
+          aria-label="Close menu"
         >
-          <CloseIcon />
-        </IconButton>
-        <List sx={{ pt: 6 }}>
-          <ListItem disablePadding>
-            <ListItemButton onClick={() => handleNavigate('/home')}>
-              <ListItemText primary="Products" sx={{ color: '#F9FAFB' }} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton onClick={() => handleAnchorClick('#portfolio')}>
-              <ListItemText primary="Portfolio" sx={{ color: '#F9FAFB' }} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton onClick={() => handleAnchorClick('#services')}>
-              <ListItemText primary="Services" sx={{ color: '#F9FAFB' }} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton onClick={() => window.location.href = 'mailto:business@nitoons.com'}>
-              <ListItemText primary="Contact Us" sx={{ color: '#3B82F6', fontWeight: 600 }} />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </DialogContent>
-    </Dialog>
-  )
-}
+          ×
+        </button>
+        <nav className="mt-8 space-y-6">
+          <button
+            className="w-full text-left text-white text-lg"
+            onClick={() => handleNavigate("/home")}
+          >
+            Products
+          </button>
+          <button
+            className="w-full text-left text-white text-lg"
+            onClick={() => handleAnchorClick("#portfolio")}
+          >
+            Portfolio
+          </button>
+          <button
+            className="w-full text-left text-white text-lg"
+            onClick={() => handleAnchorClick("#services")}
+          >
+            Services
+          </button>
+          <button
+            className="w-full text-left text-blue-500 text-lg"
+            onClick={() =>
+              (window.location.href = "mailto:business@nitoons.com")
+            }
+          >
+            Contact Us
+          </button>
+        </nav>
+      </div>
+    )
+  );
+};
 
-export default DevShopMenuDialog
+export default DevShopMenuDialog;

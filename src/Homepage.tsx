@@ -2,6 +2,7 @@ import { View } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { ReactNode, useEffect } from "react";
 import { Item2 } from "./grid/Item2";
+import DevShopHomePage from "./components/DevShop/DevShopHomePage";
 
 const Wrapper = ({ children }: { children: ReactNode }) => {
   return (
@@ -53,32 +54,35 @@ function Homepage() {
   }, []);
 
   return (
-    <div className="min-h-screen text-white bg-[#0c0c0c] select-none background">
-      <div className="container p-5 pb-20 mx-auto ">
-        <div className="relative mt-5 overflow-hidden">
-          <div
-            className="grid h-full gap-5 overflow-hidden group grid-clos-1 md:grid-cols-2 lg:grid-cols-4"
-            data-gird
-          >
-              <Wrapper>
-                <Item2/>
-              </Wrapper>
-          </div>
-
-          <div className="fixed top-0 left-0 z-20 w-full h-screen pointer-events-none ">
-            <Canvas
-              camera={{
-                zoom: 0.8,
-              }}
-              className="fixed"
-              eventSource={document.getElementById("root")!}
+    <>
+      {/* <div className="min-h-screen text-white bg-[#0c0c0c] select-none background">
+        <div className="container p-5 pb-20 mx-auto ">
+          <div className="relative mt-5 overflow-hidden">
+            <div
+              className="grid h-full gap-5 overflow-hidden group grid-clos-1 md:grid-cols-2 lg:grid-cols-4"
+              data-gird
             >
-              <View.Port />
-            </Canvas>
+              <Wrapper>
+                <Item2 />
+              </Wrapper>
+            </div>
+
+            <div className="fixed top-0 left-0 z-20 w-full h-screen pointer-events-none ">
+              <Canvas
+                camera={{
+                  zoom: 0.8,
+                }}
+                className="fixed"
+                eventSource={document.getElementById("root")!}
+              >
+                <View.Port />
+              </Canvas>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div> */}
+      <DevShopHomePage/>
+    </>
   );
 }
 

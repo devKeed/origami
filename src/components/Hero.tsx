@@ -54,7 +54,7 @@ export const Hero = () => {
         </div>
       </div>
       <div className="text-5xl text-transparent sm:text-6xl zen-dots-regular md:text-8xl lg:text-9xl from-[#828282] to-white bg-gradient-to-l bg-clip-text ">
-        ORIGAMI
+        Nitoons Devshop
       </div>
       <div className="flex flex-col justify-around text-xs border lg:flex-row md:text-s border-white/10">
         <div className="px-2 py-2 sm:px-4">

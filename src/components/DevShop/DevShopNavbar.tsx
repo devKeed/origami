@@ -1,68 +1,63 @@
-import React, { useState } from 'react'
-import { AppBar, Toolbar, Typography, Button, Box, IconButton, useMediaQuery, useTheme } from '@mui/material'
-import { useRouter } from 'next/router'
-import MenuOpenIcon from '@mui/icons-material/MenuOpen'
-import DevShopMenuDialog from './DevShopMenuDialog'
+import React, { useState } from "react";
+import DevShopMenuDialog from "./DevShopMenuDialog";
 
 const DevShopNavbar = () => {
-  const router = useRouter()
-  const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <>
-      <AppBar position="sticky" elevation={0} sx={{ backgroundColor: '#000000', borderBottom: '1px solid #1F2937' }}>
-        <Toolbar sx={{ justifyContent: 'space-between', py: 2 }}>
-         <img src="/nitoons_logo.svg" width='180px' alt="Nitoons logo" />
-          
-          {isMobile ? (
-            <IconButton onClick={() => setMenuOpen(true)} sx={{ color: '#FFFFFF' }}>
-              <MenuOpenIcon />
-            </IconButton>
-          ) : (
-            <Box sx={{ display: 'flex', gap: 4, alignItems: 'center' }}>
-              <Button sx={{ 
-                color: '#9CA3AF', 
-                textTransform: 'none',
-                fontWeight: 400,
-                '&:hover': { color: '#FFFFFF' } 
-              }} href="#portfolio">
-                Portfolio
-              </Button>
-              <Button sx={{ 
-                color: '#9CA3AF', 
-                textTransform: 'none',
-                fontWeight: 400,
-                '&:hover': { color: '#FFFFFF' } 
-              }} href="#services">
-                Services
-              </Button>
-              <Button 
-                variant="outlined" 
-                onClick={() => window.location.href = 'mailto:business@nitoons.com'}
-                sx={{ 
-                  borderRadius: 1,
-                  borderColor: '#374151',
-                  color: '#9CA3AF',
-                  fontWeight: 400,
-                  textTransform: 'none',
-                  px: 3,
-                  '&:hover': {
-                    borderColor: '#9CA3AF',
-                    bgcolor: 'transparent'
-                  }
-                }}
-              >
-                Contact Us
-              </Button>
-            </Box>
-          )}
-        </Toolbar>
-      </AppBar>
+      <nav className="sticky top-0 bg-black border-b border-gray-700">
+        <div className="container mx-auto flex items-center justify-between py-2 px-4">
+          <img src="/nitoons_logo.svg" width="180" alt="Nitoons logo" />
+          {/* Mobile menu button */}
+          <button
+            className="text-white md:hidden"
+            onClick={() => setMenuOpen(true)}
+          >
+            {/* Hamburger icon */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </button>
+          {/* Desktop links */}
+          <div className="hidden md:flex space-x-8 items-center">
+            <a
+              href="#portfolio"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              Portfolio
+            </a>
+            <a
+              href="#services"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              Services
+            </a>
+            <button
+              onClick={() =>
+                (window.location.href = "mailto:business@nitoons.com")
+              }
+              className="px-4 py-2 border border-gray-600 text-gray-400 rounded hover:border-gray-400 hover:text-white transition-colors"
+            >
+              Contact Us
+            </button>
+          </div>
+        </div>
+      </nav>
       <DevShopMenuDialog open={menuOpen} onClose={() => setMenuOpen(false)} />
     </>
-  )
-}
+  );
+};
 
-export default DevShopNavbar
+export default DevShopNavbar;
