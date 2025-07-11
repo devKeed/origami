@@ -9,7 +9,7 @@ interface AnimatedHamburgerProps {
 export const AnimatedHamburger: React.FC<AnimatedHamburgerProps> = ({
   isOpen,
   onClick,
-  className = "",
+  className = "hover:scale-105 transition-transform duration-300 ease-in-out pointer",
 }) => {
   const menuStyles: React.CSSProperties = {
     height: "60px",

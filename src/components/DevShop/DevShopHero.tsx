@@ -24,9 +24,9 @@ const DevShopHero = () => (
               style={{ fontFamily: "Zen Dots" }}
               className="text-5xl text-transparent sm:text-6xl zen-dots-regular md:text-8xl lg:text-9xl from-[#828282] to-white bg-gradient-to-l bg-clip-text "
             >
-              We Build Digital Products
+              We Build Stuff
             </div>
-            <p className="text-gray-400 text-lg md:text-xl mb-6">
+            <p className="text-gray-400 text-lg md:text-xl mb-6 max-w-xl">
               From concept to launch, we craft exceptional web and mobile
               applications that drive business growth. Your vision, our
               expertise.

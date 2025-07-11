@@ -3,7 +3,7 @@ import { Item2 } from "../../../grid/Item2";
 
 function SpinningElement() {
   return (
-    <div className="w-full h-[768px]">
+    <div className="w-full h-[358px] bg-transparent overflow-visible">
       <Canvas
         camera={{
           position: [0, 0, 3],

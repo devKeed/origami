@@ -4,11 +4,29 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   background: #000;
+}
+
+/* Custom Cursor Styles */
+* {
+  cursor: none !important;
+}
+
+/* Ensure interactive elements are properly styled */
+button,
+a,
+input,
+textarea,
+select,
+[role="button"],
+.interactive,
+[data-interactive] {
+  position: relative;
+  transition: all 0.2s ease;
 }
 
 /* .zen-dots-regular {
@@ -57,4 +75,11 @@
 
 .card:hover::before {
   opacity: 1;
+}
+
+p {
+  /* font-family: "Zen Dots", sans-serif; */
+  font-weight: 200;
+  color: #777 !important;
+  font-size: 16px !important;
 }
