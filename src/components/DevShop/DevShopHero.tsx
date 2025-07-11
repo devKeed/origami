@@ -1,4 +1,5 @@
 import { CircleBg } from "./devshop_elements/CircleBg";
+import SpinningElement from "./devshop_elements/Spinning";
 
 const DevShopHero = () => (
   <section className="py-12 md:py-16 bg-black min-h-screen flex items-center relative overflow-hidden">
@@ -19,7 +20,10 @@ const DevShopHero = () => (
             <p className="text-gray-400 text-sm uppercase mb-2">
               Nitoons Development Lab
             </p>
-            <div style={{fontFamily: "Zen Dots"}} className="text-5xl text-transparent sm:text-6xl zen-dots-regular md:text-8xl lg:text-9xl from-[#828282] to-white bg-gradient-to-l bg-clip-text ">
+            <div
+              style={{ fontFamily: "Zen Dots" }}
+              className="text-5xl text-transparent sm:text-6xl zen-dots-regular md:text-8xl lg:text-9xl from-[#828282] to-white bg-gradient-to-l bg-clip-text "
+            >
               We Build Digital Products
             </div>
             <p className="text-gray-400 text-lg md:text-xl mb-6">
@@ -46,7 +50,7 @@ const DevShopHero = () => (
           </div>
         </div>
         <div className="md:col-span-4">
-          {/* optional image or illustration */}
+          <SpinningElement />
         </div>
       </div>
     </div>
