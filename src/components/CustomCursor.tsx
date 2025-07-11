@@ -43,25 +43,14 @@ const CustomCursor = () => {
       const target = e.target as HTMLElement;
       setIsHovering(true);
 
-      // Determine color based on element type
-      let newColor = "white";
-      if (target.tagName === "BUTTON") {
-        newColor = "#60a5fa"; // Blue for buttons
-      } else if (target.tagName === "A") {
-        newColor = "#10b981"; // Green for links
-      } else if (target.classList.contains("interactive")) {
-        newColor = "#f59e0b"; // Orange for custom interactive elements
-      } else {
-        newColor = "#ec4899"; // Pink for other interactive elements
-      }
+      // Use only white or black colors
+      setCursorColor("black");
 
-      setCursorColor(newColor);
-
-      // Scale and morph animation
+      // Scale and morph animation - enhanced scaling
       gsap.to(cursor, {
-        scale: 1.8,
-        duration: 0.3,
-        ease: "back.out(1.7)",
+        scale: 2.5,
+        duration: 0.4,
+        ease: "back.out(2)",
       });
 
       // Add blobby morphing effect
@@ -83,7 +72,24 @@ const CustomCursor = () => {
       gsap.to(cursor, {
         scale: 1,
         borderRadius: "50%",
-        duration: 0.3,
+        duration: 0.4,
+        ease: "back.out(1.7)",
+      });
+    };
+
+    // Add click effect for more interaction feedback
+    const handleMouseDown = () => {
+      gsap.to(cursor, {
+        scale: isHovering ? 2 : 0.8,
+        duration: 0.1,
+        ease: "power2.out",
+      });
+    };
+
+    const handleMouseUp = () => {
+      gsap.to(cursor, {
+        scale: isHovering ? 2.5 : 1,
+        duration: 0.2,
         ease: "back.out(1.7)",
       });
     };
@@ -104,6 +110,8 @@ const CustomCursor = () => {
 
     // Initial setup
     document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mouseup", handleMouseUp);
     const elements = addHoverListeners();
     animateCursor();
 
@@ -127,6 +135,8 @@ const CustomCursor = () => {
     return () => {
       document.body.style.cursor = "auto";
       document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("mouseup", handleMouseUp);
       elements.forEach((element) => {
         element.removeEventListener("mouseenter", handleMouseEnter);
         element.removeEventListener("mouseleave", handleMouseLeave);
