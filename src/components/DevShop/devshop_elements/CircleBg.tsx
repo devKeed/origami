@@ -109,59 +109,62 @@ export const CircleBg = () => {
 
           {/* Large code brackets */}
           <g transform="translate(400, 400)">
-            <text
-              x="-120"
-              y="40"
-              fontSize="160"
-              fill="#E5E7EB"
-              fontFamily="monospace"
-              fontWeight="300"
-              opacity="0.3"
+            {/* Left bracket < */}
+            <path
+              d="M -100 -60 L -140 0 L -100 60"
+              fill="none"
+              stroke="#9CA3AF"
+              strokeWidth="8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity="0.7"
             >
               <animate
                 attributeName="opacity"
-                values="0.3;0.5;0.3"
+                values="0.4;0.9;0.4"
                 dur="3s"
                 repeatCount="indefinite"
               />
-              &lt;
-            </text>
-            <text
-              x="0"
-              y="40"
-              fontSize="160"
-              fill="#9CA3AF"
-              fontFamily="monospace"
-              fontWeight="300"
-              opacity="0.3"
+            </path>
+
+            {/* Forward slash / */}
+            <line
+              x1="-20"
+              y1="80"
+              x2="20"
+              y2="-80"
+              stroke="#6B7280"
+              strokeWidth="8"
+              strokeLinecap="round"
+              opacity="0.7"
             >
               <animate
                 attributeName="opacity"
-                values="0.3;0.5;0.3"
-                dur="3s"
-                begin="0.5s"
-                repeatCount="indefinite"
-              />
-              /
-            </text>
-            <text
-              x="60"
-              y="40"
-              fontSize="160"
-              fill="#E5E7EB"
-              fontFamily="monospace"
-              fontWeight="300"
-              opacity="0.3"
-            >
-              <animate
-                attributeName="opacity"
-                values="0.3;0.5;0.3"
+                values="0.4;0.9;0.4"
                 dur="3s"
                 begin="1s"
                 repeatCount="indefinite"
               />
-              &gt;
-            </text>
+            </line>
+
+            {/* Right bracket > */}
+            <path
+              d="M 100 -60 L 140 0 L 100 60"
+              fill="none"
+              stroke="#9CA3AF"
+              strokeWidth="8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              opacity="0.7"
+            >
+              <animate
+                attributeName="opacity"
+                values="0.4;0.9;0.4"
+                dur="3s"
+                begin="2s"
+                repeatCount="indefinite"
+              />
+            </path>
           </g>
         </svg>
       </div>
